@@ -1,59 +1,86 @@
-# FindYourLovedOne
+# Firebase Realtime Database Test App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.
+A simple Angular application demonstrating real-time data synchronization using Firebase Realtime Database.
 
-## Development server
+## Setup
 
-To start a local development server, run:
-
+1. Install dependencies:
 ```bash
-ng serve
+npm install
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+2. Configure Firebase:
+- Create a new Firebase project at [Firebase Console](https://console.firebase.google.com/)
+- Enable Realtime Database
+- Copy your Firebase configuration to `src/environments/environment.ts`
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+3. Run the application:
 ```bash
-ng generate component component-name
+npm start
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Deployment
 
+1. Install Firebase CLI:
 ```bash
-ng generate --help
+npm install -g firebase-tools
 ```
 
-## Building
-
-To build the project run:
-
+2. Login to Firebase:
 ```bash
-ng build
+firebase login
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
+3. Initialize Firebase:
 ```bash
-ng test
+firebase init
+```
+- Select Hosting
+- Select your Firebase project
+- Use `dist/find-your-loved-one` as your public directory
+- Configure as a single-page app: Yes
+- Don't overwrite index.html: No
+
+4. Build the application:
+```bash
+npm run build
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
+5. Deploy to Firebase:
 ```bash
-ng e2e
+firebase deploy
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## GitHub Setup
 
-## Additional Resources
+1. Initialize Git repository:
+```bash
+git init
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+2. Create .gitignore file:
+```bash
+echo "node_modules/
+dist/
+.firebase/
+*.log" > .gitignore
+```
+
+3. Add and commit files:
+```bash
+git add .
+git commit -m "Initial commit"
+```
+
+4. Create a new repository on GitHub and push:
+```bash
+git remote add origin <your-github-repo-url>
+git branch -M main
+git push -u origin main
+```
+
+## Features
+- Real-time counter updates
+- Firebase Realtime Database integration
+- Responsive design
+- Easy deployment to Firebase Hosting
