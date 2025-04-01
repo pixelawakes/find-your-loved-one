@@ -1,5 +1,5 @@
 .app-header {
-  background-color: #ffffff;
+  background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 1rem 0;
   position: sticky;
@@ -46,21 +46,49 @@
         }
       }
     }
+
+    .auth-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .user-email {
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .logout-btn {
+        background: none;
+        border: 1px solid #ddd;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        color: #666;
+        transition: all 0.3s;
+
+        &:hover {
+          background-color: #f5f5f5;
+        }
+      }
+    }
   }
 }
 
 .app-main {
-  min-height: calc(100vh - 120px);
-  padding: 2rem 1rem;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 2rem 1rem;
+  min-height: calc(100vh - 120px);
 }
 
 .app-footer {
-  background-color: #f8f9fa;
-  padding: 1.5rem 0;
+  background-color: #f5f5f5;
+  padding: 1rem 0;
   text-align: center;
   color: #666;
+  position: relative;
+  bottom: 0;
+  width: 100%;
 
   p {
     margin: 0;

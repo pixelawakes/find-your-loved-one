@@ -1,16 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   template: `
     <div class="login-container">
-      <h2>Login</h2>
+      <h2>Login Required</h2>
+      <p class="message">Please sign in to submit a report.</p>
       <button (click)="signInWithGoogle()" class="google-btn">
-        <img src="assets/google-icon.png" alt="Google" class="google-icon">
+        <img src="assets/google-icon.svg" alt="Google" class="google-icon">
         Sign in with Google
       </button>
       <div *ngIf="error" class="error-message">
@@ -30,8 +32,14 @@ import { AuthService } from '../../services/auth.service';
 
     h2 {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
       color: #333;
+    }
+
+    .message {
+      text-align: center;
+      color: #666;
+      margin-bottom: 2rem;
     }
 
     .google-btn {
@@ -66,17 +74,30 @@ import { AuthService } from '../../services/auth.service';
     }
   `]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   error: string | null = null;
+  returnUrl: string = '/';
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.returnUrl = params['returnUrl'] || '/';
+    });
+  }
 
   async signInWithGoogle() {
     try {
       await this.authService.signInWithGoogle();
       this.error = null;
+      this.router.navigate([this.returnUrl]);
     } catch (err) {
       this.error = 'Failed to sign in with Google. Please try again.';
+      console.error('Login error:', err);
     }
   }
 } 
