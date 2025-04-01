@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet, RouterModule } from '@angular/router';
+import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './services/auth.service';
+import { filter, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -16,12 +17,20 @@ export class AppComponent implements OnInit {
   isLoggedIn = false;
   userEmail: string | null = null;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.authService.getCurrentUser().subscribe(user => {
-      this.isLoggedIn = !!user;
-      this.userEmail = user?.email || null;
+    this.authService.isInitialized().pipe(
+      filter(initialized => initialized),
+      take(1)
+    ).subscribe(() => {
+      this.authService.getCurrentUser().subscribe(user => {
+        this.isLoggedIn = !!user;
+        this.userEmail = user?.email || null;
+      });
     });
   }
 
@@ -30,6 +39,14 @@ export class AppComponent implements OnInit {
       await this.authService.signOut();
     } catch (error) {
       console.error('Error signing out:', error);
+    }
+  }
+
+  handleReportClick() {
+    if (this.isLoggedIn) {
+      this.router.navigate(['/report']);
+    } else {
+      this.router.navigate(['/login'], { queryParams: { returnUrl: '/report' } });
     }
   }
 }

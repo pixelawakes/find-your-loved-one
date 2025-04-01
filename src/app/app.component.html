@@ -3,7 +3,7 @@
     <a routerLink="/" class="logo">Find Your Loved One</a>
     <div class="nav-links">
       <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-      <a routerLink="/report" routerLinkActive="active">Report</a>
+      <a (click)="handleReportClick()" class="nav-link">Report</a>
       <a routerLink="/reports" routerLinkActive="active">View Reports</a>
       <a routerLink="/test" routerLinkActive="active">Test Connection</a>
       <div class="auth-section">
