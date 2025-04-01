@@ -8,12 +8,12 @@ export const environment = {
   firebase: {
     apiKey: "AIzaSyArJ0l8HFnnEp4kWq1PD6R005EwRjjxJeg",
     authDomain: "find-your-loved-one.firebaseapp.com",
+    databaseURL: "https://find-your-loved-one-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "find-your-loved-one",
     storageBucket: "find-your-loved-one.firebasestorage.app",
     messagingSenderId: "626525109616",
     appId: "1:626525109616:web:23d975a9d871b459fea3b5",
-    measurementId: "G-4PKYZDKWS4",
-    databaseURL: "https://find-your-loved-one-default-rtdb.asia-southeast1.firebasedatabase.app"
+    measurementId: "G-4PKYZDKWS4"
   }
 };
 

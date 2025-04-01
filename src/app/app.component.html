@@ -4,7 +4,15 @@
     <div class="nav-links">
       <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
       <a routerLink="/report" routerLinkActive="active">Report</a>
+      <a routerLink="/reports" routerLinkActive="active">View Reports</a>
       <a routerLink="/test" routerLinkActive="active">Test Connection</a>
+      <div class="auth-section">
+        <ng-container *ngIf="isLoggedIn">
+          <span class="user-email">{{ userEmail }}</span>
+          <button (click)="signOut()" class="logout-btn">Logout</button>
+        </ng-container>
+        <a *ngIf="!isLoggedIn" routerLink="/login" routerLinkActive="active">Login</a>
+      </div>
     </div>
   </nav>
 </header>
